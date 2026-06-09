@@ -4,8 +4,8 @@ import { home } from '@/routes';
 
 export default function LoginBrandLayout({ children }: { children: ReactNode }) {
     return (
-        <div className="flex min-h-svh flex-col bg-zinc-950 lg:flex-row">
-            <aside className="relative flex min-h-[38vh] flex-col overflow-hidden bg-gradient-to-b from-[#ff7a1a] via-[#f85f00] to-[#c2410c] text-white lg:min-h-svh lg:w-[40%] lg:max-w-lg lg:shrink-0">
+        <div className="flex min-h-svh flex-col bg-white lg:flex-row">
+            <aside className="relative flex min-h-[38vh] flex-col overflow-hidden bg-gradient-to-b from-[#2563eb] via-[#1e40af] to-[#1e3a8a] text-white lg:min-h-svh lg:w-[40%] lg:max-w-lg lg:shrink-0">
                 <div
                     className="pointer-events-none absolute inset-0"
                     aria-hidden
@@ -18,7 +18,7 @@ export default function LoginBrandLayout({ children }: { children: ReactNode }) 
                     <div className="flex flex-1 flex-col items-center justify-center px-6 py-10 text-center sm:px-10 lg:py-16">
                         <Link
                             href={home()}
-                            className="group outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#f85f00] focus-visible:rounded-2xl"
+                            className="group outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#2563eb] focus-visible:rounded-2xl"
                         >
                             <div className="rounded-2xl bg-black/25 p-4 shadow-[0_12px_40px_-8px_rgba(0,0,0,0.45)] ring-1 ring-white/15 backdrop-blur-[2px] transition-transform duration-300 group-hover:scale-[1.02] group-active:scale-[0.99]">
                                 <img
@@ -47,15 +47,15 @@ export default function LoginBrandLayout({ children }: { children: ReactNode }) 
                     aria-hidden
                     style={{
                         background:
-                            'radial-gradient(ellipse 85% 55% at 50% -10%, rgba(248,95,0,0.14), transparent 50%)',
+                            'radial-gradient(ellipse 85% 55% at 50% -10%, rgba(37,99,235,0.14), transparent 50%)',
                     }}
                 />
-                <div className="relative mx-auto w-full max-w-[420px] rounded-2xl border border-white/[0.08] bg-zinc-900/85 p-8 shadow-[0_24px_64px_-12px_rgba(0,0,0,0.65)] ring-1 ring-white/[0.04] backdrop-blur-xl sm:p-9">
+                <div className="relative mx-auto w-full max-w-[420px] rounded-2xl border border-zinc-200 bg-white p-8 shadow-lg shadow-black/5 ring-1 ring-zinc-100 backdrop-blur-xl sm:p-9">
                     <div className="mb-8 text-center">
-                        <h1 className="text-[1.65rem] font-semibold tracking-tight text-white">
+                        <h1 className="text-[1.65rem] font-semibold tracking-tight text-zinc-900">
                             Welcome back
                         </h1>
-                        <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                        <p className="mt-2 text-sm leading-relaxed text-zinc-600">
                             Sign in with your email to open the dashboard
                         </p>
                     </div>

@@ -12,7 +12,7 @@ import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 
 const fieldClass =
-    'h-11 border-white/10 bg-white/5 text-white shadow-none placeholder:text-zinc-500 focus-visible:border-[#f85f00] focus-visible:ring-[#f85f00]/35';
+    'h-11 border-white/10 bg-white/5 text-white shadow-none placeholder:text-zinc-500 focus-visible:border-[#2563eb] focus-visible:ring-[#2563eb]/35';
 
 type Props = {
     status?: string;
@@ -75,7 +75,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                         <TextLink
                                             href={request()}
                                             className={cn(
-                                                'ml-auto text-sm text-[#f85f00] decoration-[#f85f00]/50 underline-offset-4 hover:text-[#ff7a26] hover:decoration-[#ff7a26]',
+                                                'ml-auto text-sm text-[#2563eb] decoration-[#2563eb]/50 underline-offset-4 hover:text-[#3b82f6] hover:decoration-[#3b82f6]',
                                             )}
                                             tabIndex={5}
                                         >
@@ -91,7 +91,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                     autoComplete="current-password"
                                     placeholder="••••••••"
                                     className={cn(fieldClass, 'pr-10')}
-                                    toggleClassName="text-zinc-400 hover:text-zinc-200 focus-visible:ring-[#f85f00]/40"
+                                    toggleClassName="text-zinc-400 hover:text-zinc-200 focus-visible:ring-[#2563eb]/40"
                                 />
                                 <InputError
                                     message={errors.password}
@@ -104,7 +104,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                     id="remember"
                                     name="remember"
                                     tabIndex={3}
-                                    className="border-white/20 data-[state=checked]:border-[#f85f00] data-[state=checked]:bg-[#f85f00] data-[state=checked]:text-white"
+                                    className="border-white/20 data-[state=checked]:border-[#2563eb] data-[state=checked]:bg-[#2563eb] data-[state=checked]:text-white"
                                 />
                                 <Label
                                     htmlFor="remember"
@@ -116,7 +116,7 @@ export default function Login({ status, canResetPassword }: Props) {
 
                             <Button
                                 type="submit"
-                                className="mt-2 h-11 w-full bg-[#f85f00] font-semibold text-white shadow-lg shadow-[#f85f00]/25 transition-colors hover:bg-[#e05500]"
+                                className="mt-2 h-11 w-full bg-[#2563eb] font-semibold text-white shadow-lg shadow-[#2563eb]/25 transition-colors hover:bg-[#1e40af]"
                                 tabIndex={4}
                                 disabled={processing}
                                 data-test="login-button"

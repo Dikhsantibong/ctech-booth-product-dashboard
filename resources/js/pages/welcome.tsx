@@ -31,20 +31,20 @@ export default function Welcome() {
         <>
             <Head title="Potopi Photobooth" />
 
-            <div className="relative min-h-svh overflow-x-hidden bg-zinc-950 text-zinc-100">
+            <div className="relative min-h-svh overflow-x-hidden bg-white text-zinc-900">
                 <div
                     className="pointer-events-none fixed inset-0"
                     aria-hidden
                     style={{
                         background:
-                            'radial-gradient(ellipse 100% 60% at 50% -25%, rgba(248,95,0,0.22), transparent 55%), radial-gradient(circle at 100% 0%, rgba(248,95,0,0.08), transparent 40%)',
+                            'radial-gradient(ellipse 100% 60% at 50% -25%, rgba(37,99,235,0.08), transparent 55%), radial-gradient(circle at 100% 0%, rgba(37,99,235,0.04), transparent 40%)',
                     }}
                 />
-                <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(to_bottom,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
+                <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(to_bottom,transparent_0%,rgba(255,255,255,0.4)_100%)]" />
 
-                <header className="relative z-10 border-b border-white/[0.06] bg-zinc-950/75 backdrop-blur-xl">
+                <header className="relative z-10 border-b border-zinc-200 bg-white/75 backdrop-blur-xl">
                     <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-                        <div className="rounded-xl bg-black/35 p-2.5 ring-1 ring-white/10">
+                        <div className="rounded-xl bg-white/35 p-2.5 ring-1 ring-zinc-300">
                             <img
                                 src="/images/logo.png"
                                 alt="Potopi Photobooth"
@@ -57,7 +57,7 @@ export default function Welcome() {
                                 <Link
                                     href={dashboard()}
                                     className={cn(
-                                        'inline-flex items-center gap-2 rounded-lg bg-[#f85f00] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#f85f00]/20 transition hover:bg-[#e05500]',
+                                        'inline-flex items-center gap-2 rounded-lg bg-[#2563eb] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#2563eb]/20 transition hover:bg-[#1e40af]',
                                     )}
                                 >
                                     <LayoutDashboard className="size-4" />
@@ -66,7 +66,7 @@ export default function Welcome() {
                             ) : (
                                 <Link
                                     href={login()}
-                                    className="inline-flex items-center rounded-lg bg-[#f85f00] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#f85f00]/20 transition hover:bg-[#e05500]"
+                                    className="inline-flex items-center rounded-lg bg-[#2563eb] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#2563eb]/20 transition hover:bg-[#1e40af]"
                                 >
                                     Log in
                                 </Link>
@@ -78,13 +78,13 @@ export default function Welcome() {
                 <main className="relative z-10">
                     <section className="mx-auto max-w-6xl px-4 pb-16 pt-14 sm:px-6 sm:pb-20 sm:pt-20 lg:px-8 lg:pb-28 lg:pt-24">
                         <div className="mx-auto max-w-3xl text-center">
-                            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#ff8c38]">
+                            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#2563eb]">
                                 Booth operations, simplified
                             </p>
-                            <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
+                            <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight text-zinc-900 sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
                                 Run your photobooth business from one place
                             </h1>
-                            <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-zinc-400 sm:text-lg">
+                            <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-zinc-600 sm:text-lg">
                                 Potopi helps you manage machines, templates, vouchers, and
                                 guest downloads—so you spend less time on admin and more
                                 time at the event.
@@ -93,7 +93,7 @@ export default function Welcome() {
                                 {auth.user ? (
                                     <Link
                                         href={dashboard()}
-                                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#f85f00] px-8 py-3.5 text-base font-semibold text-white shadow-xl shadow-[#f85f00]/25 transition hover:bg-[#e05500] sm:w-auto"
+                                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#2563eb] px-8 py-3.5 text-base font-semibold text-white shadow-xl shadow-[#2563eb]/25 transition hover:bg-[#1e40af] sm:w-auto"
                                     >
                                         <LayoutDashboard className="size-5" />
                                         Open dashboard
@@ -102,7 +102,7 @@ export default function Welcome() {
                                     <>
                                         <Link
                                             href={login()}
-                                            className="inline-flex w-full items-center justify-center rounded-xl bg-[#f85f00] px-8 py-3.5 text-base font-semibold text-white shadow-xl shadow-[#f85f00]/25 transition hover:bg-[#e05500] sm:w-auto"
+                                            className="inline-flex w-full items-center justify-center rounded-xl bg-[#2563eb] px-8 py-3.5 text-base font-semibold text-white shadow-xl shadow-[#2563eb]/25 transition hover:bg-[#1e40af] sm:w-auto"
                                         >
                                             Sign in to dashboard
                                         </Link>
@@ -120,14 +120,14 @@ export default function Welcome() {
 
                     <section
                         id="features"
-                        className="border-t border-white/[0.06] bg-black/25 py-16 sm:py-20 lg:py-24"
+                        className="border-t border-zinc-200 bg-zinc-50 py-16 sm:py-20 lg:py-24"
                     >
                         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                             <div className="mx-auto max-w-2xl text-center">
-                                <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                                <h2 className="text-2xl font-semibold tracking-tight text-zinc-900 sm:text-3xl">
                                     Built for busy booth teams
                                 </h2>
-                                <p className="mt-3 text-zinc-400">
+                                <p className="mt-3 text-zinc-600">
                                     Everything you need behind the curtain—without the
                                     spreadsheet chaos.
                                 </p>
@@ -136,15 +136,15 @@ export default function Welcome() {
                                 {features.map(({ icon: Icon, title, description }) => (
                                     <li
                                         key={title}
-                                        className="group rounded-2xl border border-white/[0.08] bg-zinc-900/50 p-6 shadow-lg shadow-black/20 backdrop-blur-sm transition hover:border-[#f85f00]/30 hover:bg-zinc-900/70 sm:p-7"
+                                        className="group rounded-2xl border border-zinc-200 bg-white p-6 shadow-lg shadow-black/5 backdrop-blur-sm transition hover:border-[#2563eb]/30 hover:bg-zinc-50 sm:p-7"
                                     >
-                                        <div className="flex size-11 items-center justify-center rounded-xl bg-[#f85f00]/15 text-[#f85f00] ring-1 ring-[#f85f00]/25 transition group-hover:bg-[#f85f00]/25">
+                                        <div className="flex size-11 items-center justify-center rounded-xl bg-[#2563eb]/10 text-[#2563eb] ring-1 ring-[#2563eb]/20 transition group-hover:bg-[#2563eb]/15">
                                             <Icon className="size-5" strokeWidth={2} />
                                         </div>
-                                        <h3 className="mt-5 text-lg font-semibold text-white">
+                                        <h3 className="mt-5 text-lg font-semibold text-zinc-900">
                                             {title}
                                         </h3>
-                                        <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                                        <p className="mt-2 text-sm leading-relaxed text-zinc-600">
                                             {description}
                                         </p>
                                     </li>
@@ -153,12 +153,12 @@ export default function Welcome() {
                         </div>
                     </section>
 
-                    <section className="border-t border-white/[0.06] py-14 sm:py-16">
+                    <section className="border-t border-zinc-200 py-14 sm:py-16">
                         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-                            <p className="text-lg font-medium text-white sm:text-xl">
+                            <p className="text-lg font-medium text-zinc-900 sm:text-xl">
                                 Ready when you are.
                             </p>
-                            <p className="mt-2 text-zinc-400">
+                            <p className="mt-2 text-zinc-600">
                                 {auth.user
                                     ? "Head to your dashboard to manage today's events."
                                     : 'Log in with your team account to get started.'}
@@ -167,14 +167,14 @@ export default function Welcome() {
                                 {auth.user ? (
                                     <Link
                                         href={dashboard()}
-                                        className="inline-flex items-center gap-2 rounded-xl bg-[#f85f00] px-6 py-3 font-semibold text-white transition hover:bg-[#e05500]"
+                                        className="inline-flex items-center gap-2 rounded-xl bg-[#2563eb] px-6 py-3 font-semibold text-white transition hover:bg-[#1e40af]"
                                     >
                                         Go to dashboard
                                     </Link>
                                 ) : (
                                     <Link
                                         href={login()}
-                                        className="inline-flex items-center rounded-xl bg-[#f85f00] px-6 py-3 font-semibold text-white transition hover:bg-[#e05500]"
+                                        className="inline-flex items-center rounded-xl bg-[#2563eb] px-6 py-3 font-semibold text-white transition hover:bg-[#1e40af]"
                                     >
                                         Log in
                                     </Link>
@@ -183,7 +183,7 @@ export default function Welcome() {
                         </div>
                     </section>
 
-                    <footer className="border-t border-white/[0.06] py-8">
+                    <footer className="border-t border-zinc-200 py-8">
                         <p className="text-center text-sm text-zinc-500">
                             © {new Date().getFullYear()} Potopi Photobooth. All rights
                             reserved.
