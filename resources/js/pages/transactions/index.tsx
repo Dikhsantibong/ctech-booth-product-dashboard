@@ -151,7 +151,7 @@ return '-';
                 <div className="overflow-hidden rounded-xl border bg-card">
                     <div className="flex flex-col md:flex-row md:items-center gap-3 border-b p-3 justify-between">
                         <form onSubmit={handleSearch} className="relative flex-1 max-w-sm">
-                            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-sidebar-foreground" />
                             <Input
                                 placeholder="Search by ID or Machine..."
                                 value={searchQuery}
@@ -192,7 +192,7 @@ return '-';
 
                     <Table>
                         <TableHeader>
-                            <TableRow className="bg-sidebar/50">
+                            <TableRow className="bg-sidebar">
                                 <TableHead className="w-[150px]">Transaction ID</TableHead>
                                 <TableHead>Machine</TableHead>
                                 <TableHead>Template</TableHead>
@@ -277,7 +277,7 @@ return '-';
                         </TableBody>
                     </Table>
 
-                    <div className="border-t bg-sidebar/50">
+                    <div className="border-t bg-sidebar">
                         <Pagination links={transactions.links} className="py-3" />
                     </div>
                 </div>

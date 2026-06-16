@@ -14,13 +14,13 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --primary: #f59e0b;
-            --primary-hover: #d97706;
-            --bg-dark: #0f172a;
-            --bg-card: rgba(30, 41, 59, 0.7);
-            --text-main: #fcf8f1;
-            --text-muted: #94a3b8;
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg-dark: #1e3a8a;
+            --bg-card: rgba(30, 58, 138, 0.7);
+            --text-main: #ffffff;
+            --text-muted: #bfdbfe;
+            --glass-border: rgba(255, 255, 255, 0.2);
         }
 
         * {
@@ -31,7 +31,7 @@
         }
 
         body {
-            background: radial-gradient(circle at top left, #2d1b0d 0%, #0f172a 100%);
+            background: radial-gradient(circle at top left, #1e40af 0%, #1e3a8a 50%, #172554 100%);
             color: var(--text-main);
             min-height: 100vh;
             padding-bottom: 4rem;

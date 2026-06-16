@@ -405,29 +405,80 @@ export default function Dashboard() {
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <div className="grid auto-cols-fr grid-flow-col items-end gap-3 overflow-x-auto">
-                            {transactionChartData.length > 0 ? (
-                                transactionChartData.map((point) => {
-                                    const barHeight = Math.max(10, Math.round((point.total / maxTransaction) * 140));
-
-                                    return (
-                                        <div key={point.day} className="flex flex-col items-center gap-2">
-                                            <span className="text-xs font-medium">{point.total}</span>
-                                            <div
-                                                className="w-full max-w-10 rounded-md bg-primary/85 transition-all hover:bg-primary"
-                                                style={{ height: `${barHeight}px` }}
-                                                title={`${point.day}: ${point.total} transaksi`}
-                                            />
-                                            <span className="text-muted-foreground text-xs">{point.day}</span>
-                                        </div>
-                                    );
-                                })
-                            ) : (
-                                <div className="text-muted-foreground col-span-7 rounded-lg border border-dashed p-3 text-sm">
-                                    Belum ada data transaksi untuk ditampilkan.
+                        {transactionChartData.length > 0 ? (
+                            <div className="relative h-48 w-full">
+                                <svg
+                                    className="h-full w-full"
+                                    viewBox="0 0 400 150"
+                                    preserveAspectRatio="none"
+                                >
+                                    {/* Grid lines */}
+                                    {[0, 25, 50, 75, 100].map((percent) => (
+                                        <line
+                                            key={percent}
+                                            x1="0"
+                                            y1={150 - (percent / 100) * 130}
+                                            x2="400"
+                                            y2={150 - (percent / 100) * 130}
+                                            stroke="hsl(var(--border))"
+                                            strokeWidth="1"
+                                            strokeDasharray="4"
+                                        />
+                                    ))}
+                                    
+                                    {/* Line chart */}
+                                    <polyline
+                                        fill="none"
+                                        stroke="hsl(var(--primary))"
+                                        strokeWidth="2"
+                                        points={transactionChartData.map((point, index) => {
+                                            const x = (index / (transactionChartData.length - 1)) * 380 + 10;
+                                            const y = 150 - (point.total / maxTransaction) * 130;
+                                            return `${x},${y}`;
+                                        }).join(' ')}
+                                    />
+                                    
+                                    {/* Data points */}
+                                    {transactionChartData.map((point, index) => {
+                                        const x = (index / (transactionChartData.length - 1)) * 380 + 10;
+                                        const y = 150 - (point.total / maxTransaction) * 130;
+                                        return (
+                                            <g key={point.day}>
+                                                <circle
+                                                    cx={x}
+                                                    cy={y}
+                                                    r="4"
+                                                    fill="hsl(var(--primary))"
+                                                    className="hover:r-6 transition-all cursor-pointer"
+                                                />
+                                                <title>{`${point.day}: ${point.total} transaksi`}</title>
+                                            </g>
+                                        );
+                                    })}
+                                </svg>
+                                
+                                {/* X-axis labels */}
+                                <div className="flex justify-between mt-2 px-2">
+                                    {transactionChartData.map((point, index) => (
+                                        <span
+                                            key={point.day}
+                                            className="text-muted-foreground text-xs"
+                                            style={{
+                                                position: 'absolute',
+                                                left: `${(index / (transactionChartData.length - 1)) * 100}%`,
+                                                transform: 'translateX(-50%)',
+                                            }}
+                                        >
+                                            {point.day}
+                                        </span>
+                                    ))}
                                 </div>
-                            )}
-                        </div>
+                            </div>
+                        ) : (
+                            <div className="text-muted-foreground rounded-lg border border-dashed p-3 text-sm">
+                                Belum ada data transaksi untuk ditampilkan.
+                            </div>
+                        )}
                     </CardContent>
                 </Card>
 
