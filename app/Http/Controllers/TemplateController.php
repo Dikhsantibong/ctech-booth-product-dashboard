@@ -73,7 +73,7 @@ class TemplateController extends Controller
             'category' => 'nullable|string|max:255',
             'orientation' => 'required|in:portrait,landscape',
             'paper_size_id' => 'required|exists:paper_sizes,id',
-            'template_path' => 'required|image|mimes:jpeg,png,jpg,webp|max:10240', // Max 10MB
+            'template_path' => 'required|image|mimes:jpeg,png,jpg,webp|max:20480', // Max 20MB
         ]);
 
         if ($request->hasFile('template_path')) {
