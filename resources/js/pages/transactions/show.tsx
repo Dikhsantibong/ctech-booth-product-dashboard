@@ -234,7 +234,7 @@ return '-';
                     </Card>
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-2">
+                <div className="grid gap-6 md:grid-cols-3">
                     {/* Final Image */}
                     <Card className='gap-0 py-4'>
                         <CardHeader className="pb-3 border-b mb-4">
@@ -300,6 +300,45 @@ return '-';
                                 <div className="py-12 text-center text-muted-foreground">
                                     <Video className="h-12 w-12 mx-auto mb-2 opacity-20" />
                                     No live photo video available
+                                </div>
+                            )}
+                        </CardContent>
+                    </Card>
+
+                    {/* GIF Video */}
+                    <Card className='gap-0 py-4'>
+                        <CardHeader className="pb-3 border-b mb-4">
+                            <CardTitle className="text-lg font-semibold flex items-center gap-2">
+                                <Video className="h-5 w-5 text-primary" />
+                                GIF Video
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent className="flex flex-col items-center">
+                            {transaction.final_image?.gif_url && !transaction.final_image.gif_url.includes('EXPIRED') ? (
+                                <>
+                                    <div className="relative group max-w-xs mx-auto mb-6 bg-sidebar rounded-lg p-2 border">
+                                        <video
+                                            src={transaction.final_image.gif_url}
+                                            controls
+                                            loop
+                                            autoPlay
+                                            muted
+                                            className="rounded shadow-lg w-full max-h-[400px] object-contain"
+                                        />
+                                    </div>
+                                    <Button
+                                        variant="secondary"
+                                        className="w-full max-w-[240px]"
+                                        onClick={() => handleDownload(transaction.final_image!.gif_url!, `gif_${transaction.transaction_id}.mp4`)}
+                                    >
+                                        <Download className="mr-2 h-4 w-4" />
+                                        Download GIF Video
+                                    </Button>
+                                </>
+                            ) : (
+                                <div className="py-12 text-center text-muted-foreground">
+                                    <Video className="h-12 w-12 mx-auto mb-2 opacity-20" />
+                                    No GIF video available
                                 </div>
                             )}
                         </CardContent>
