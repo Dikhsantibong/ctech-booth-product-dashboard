@@ -1,11 +1,25 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import type { ReactNode } from 'react';
 import { home } from '@/routes';
+import { BrandInjector } from '@/components/brand-injector';
+
+interface SharedData {
+    name: string;
+    appLogo?: string;
+    [key: string]: any;
+}
 
 export default function LoginBrandLayout({ children }: { children: ReactNode }) {
+    const { name, appLogo } = usePage<SharedData>().props;
+    
     return (
         <div className="flex min-h-svh flex-col bg-white lg:flex-row">
-            <aside className="relative flex min-h-[38vh] flex-col overflow-hidden bg-gradient-to-b from-[#2563eb] via-[#1e40af] to-[#1e3a8a] text-white lg:min-h-svh lg:w-[40%] lg:max-w-lg lg:shrink-0">
+            <BrandInjector />
+            <aside className="relative flex min-h-[38vh] flex-col overflow-hidden bg-primary text-primary-foreground lg:min-h-svh lg:w-[40%] lg:max-w-lg lg:shrink-0">
+                <div
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/30"
+                    aria-hidden
+                />
                 <div
                     className="pointer-events-none absolute inset-0"
                     aria-hidden
@@ -18,12 +32,12 @@ export default function LoginBrandLayout({ children }: { children: ReactNode }) 
                     <div className="flex flex-1 flex-col items-center justify-center px-6 py-10 text-center sm:px-10 lg:py-16">
                         <Link
                             href={home()}
-                            className="group outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#2563eb] focus-visible:rounded-2xl"
+                            className="group outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:rounded-2xl"
                         >
                             <div className="rounded-2xl bg-black/25 p-4 shadow-[0_12px_40px_-8px_rgba(0,0,0,0.45)] ring-1 ring-white/15 backdrop-blur-[2px] transition-transform duration-300 group-hover:scale-[1.02] group-active:scale-[0.99]">
                                 <img
-                                    src="/images/logo.png"
-                                    alt="Potopi Photobooth"
+                                    src={appLogo || "/images/logo.png"}
+                                    alt={name}
                                     className="mx-auto h-auto w-full max-w-[min(72vw,280px)] object-contain sm:max-w-[300px]"
                                     decoding="async"
                                     fetchPriority="high"
@@ -36,7 +50,7 @@ export default function LoginBrandLayout({ children }: { children: ReactNode }) 
                         </p>
                     </div>
                     <p className="relative z-10 shrink-0 px-6 pb-6 pt-2 text-center text-xs text-white/50 sm:pb-8">
-                        © {new Date().getFullYear()} Potopi Photobooth
+                        © {new Date().getFullYear()} {name}
                     </p>
                 </div>
             </aside>
@@ -47,7 +61,7 @@ export default function LoginBrandLayout({ children }: { children: ReactNode }) 
                     aria-hidden
                     style={{
                         background:
-                            'radial-gradient(ellipse 85% 55% at 50% -10%, rgba(37,99,235,0.14), transparent 50%)',
+                            'radial-gradient(ellipse 85% 55% at 50% -10%, var(--color-primary), transparent 50%)',
                     }}
                 />
                 <div className="relative mx-auto w-full max-w-[420px] rounded-2xl border border-zinc-200 bg-white p-8 shadow-lg shadow-black/5 ring-1 ring-zinc-100 backdrop-blur-xl sm:p-9">

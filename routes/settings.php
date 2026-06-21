@@ -21,4 +21,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('user-password.update');
 
     Route::inertia('settings/appearance', 'settings/appearance')->name('appearance.edit');
+    
+    Route::get('settings/brand', [\App\Http\Controllers\Settings\BrandController::class, 'edit'])->name('brand.edit');
+    Route::post('settings/brand', [\App\Http\Controllers\Settings\BrandController::class, 'update'])->name('brand.update');
 });

@@ -2,6 +2,7 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import { Camera, Download, LayoutDashboard, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { dashboard, login } from '@/routes';
+import { BrandInjector } from '@/components/brand-injector';
 
 const features = [
     {
@@ -25,11 +26,12 @@ const features = [
 ] as const;
 
 export default function Welcome() {
-    const { auth } = usePage().props;
+    const { auth, name, appLogo } = usePage<any>().props;
 
     return (
         <>
-            <Head title="Potopi Photobooth" />
+            <BrandInjector />
+            <Head title={name} />
 
             <div className="relative min-h-svh overflow-x-hidden bg-white text-zinc-900">
                 <div
@@ -46,8 +48,8 @@ export default function Welcome() {
                     <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
                         <div className="rounded-xl bg-white/35 p-2.5 ring-1 ring-zinc-300">
                             <img
-                                src="/images/logo.png"
-                                alt="Potopi Photobooth"
+                                src={appLogo || "/images/logo.png"}
+                                alt={name}
                                 className="h-8 w-auto max-w-[140px] object-contain sm:h-9 sm:max-w-[170px]"
                                 decoding="async"
                             />
@@ -57,7 +59,7 @@ export default function Welcome() {
                                 <Link
                                     href={dashboard()}
                                     className={cn(
-                                        'inline-flex items-center gap-2 rounded-lg bg-[#2563eb] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#2563eb]/20 transition hover:bg-[#1e40af]',
+                                        'inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition hover:opacity-90',
                                     )}
                                 >
                                     <LayoutDashboard className="size-4" />
@@ -66,7 +68,7 @@ export default function Welcome() {
                             ) : (
                                 <Link
                                     href={login()}
-                                    className="inline-flex items-center rounded-lg bg-[#2563eb] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#2563eb]/20 transition hover:bg-[#1e40af]"
+                                    className="inline-flex items-center rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition hover:opacity-90"
                                 >
                                     Log in
                                 </Link>
@@ -78,14 +80,14 @@ export default function Welcome() {
                 <main className="relative z-10">
                     <section className="mx-auto max-w-6xl px-4 pb-16 pt-14 sm:px-6 sm:pb-20 sm:pt-20 lg:px-8 lg:pb-28 lg:pt-24">
                         <div className="mx-auto max-w-3xl text-center">
-                            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#2563eb]">
+                            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
                                 Booth operations, simplified
                             </p>
                             <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight text-zinc-900 sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
                                 Run your photobooth business from one place
                             </h1>
                             <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-zinc-600 sm:text-lg">
-                                Potopi helps you manage machines, templates, vouchers, and
+                                {name} helps you manage machines, templates, vouchers, and
                                 guest downloads—so you spend less time on admin and more
                                 time at the event.
                             </p>
@@ -93,7 +95,7 @@ export default function Welcome() {
                                 {auth.user ? (
                                     <Link
                                         href={dashboard()}
-                                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#2563eb] px-8 py-3.5 text-base font-semibold text-white shadow-xl shadow-[#2563eb]/25 transition hover:bg-[#1e40af] sm:w-auto"
+                                        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-primary-foreground shadow-xl shadow-primary/25 transition hover:opacity-90 sm:w-auto"
                                     >
                                         <LayoutDashboard className="size-5" />
                                         Open dashboard
@@ -102,7 +104,7 @@ export default function Welcome() {
                                     <>
                                         <Link
                                             href={login()}
-                                            className="inline-flex w-full items-center justify-center rounded-xl bg-[#2563eb] px-8 py-3.5 text-base font-semibold text-white shadow-xl shadow-[#2563eb]/25 transition hover:bg-[#1e40af] sm:w-auto"
+                                            className="inline-flex w-full items-center justify-center rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-primary-foreground shadow-xl shadow-primary/25 transition hover:opacity-90 sm:w-auto"
                                         >
                                             Sign in to dashboard
                                         </Link>
@@ -136,9 +138,9 @@ export default function Welcome() {
                                 {features.map(({ icon: Icon, title, description }) => (
                                     <li
                                         key={title}
-                                        className="group rounded-2xl border border-zinc-200 bg-white p-6 shadow-lg shadow-black/5 backdrop-blur-sm transition hover:border-[#2563eb]/30 hover:bg-zinc-50 sm:p-7"
+                                        className="group rounded-2xl border border-zinc-200 bg-white p-6 shadow-lg shadow-black/5 backdrop-blur-sm transition hover:border-primary/30 hover:bg-zinc-50 sm:p-7"
                                     >
-                                        <div className="flex size-11 items-center justify-center rounded-xl bg-[#2563eb]/10 text-[#2563eb] ring-1 ring-[#2563eb]/20 transition group-hover:bg-[#2563eb]/15">
+                                        <div className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20 transition group-hover:bg-primary/15">
                                             <Icon className="size-5" strokeWidth={2} />
                                         </div>
                                         <h3 className="mt-5 text-lg font-semibold text-zinc-900">
@@ -167,14 +169,14 @@ export default function Welcome() {
                                 {auth.user ? (
                                     <Link
                                         href={dashboard()}
-                                        className="inline-flex items-center gap-2 rounded-xl bg-[#2563eb] px-6 py-3 font-semibold text-white transition hover:bg-[#1e40af]"
+                                        className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:opacity-90"
                                     >
                                         Go to dashboard
                                     </Link>
                                 ) : (
                                     <Link
                                         href={login()}
-                                        className="inline-flex items-center rounded-xl bg-[#2563eb] px-6 py-3 font-semibold text-white transition hover:bg-[#1e40af]"
+                                        className="inline-flex items-center rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:opacity-90"
                                     >
                                         Log in
                                     </Link>
@@ -185,7 +187,7 @@ export default function Welcome() {
 
                     <footer className="border-t border-zinc-200 py-8">
                         <p className="text-center text-sm text-zinc-500">
-                            © {new Date().getFullYear()} Potopi Photobooth. All rights
+                            © {new Date().getFullYear()} {name}. All rights
                             reserved.
                         </p>
                     </footer>

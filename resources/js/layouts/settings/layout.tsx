@@ -32,6 +32,11 @@ const sidebarNavItems: NavItem[] = [
         href: paymentGateway.edit().url,
         icon: null,
     },
+    {
+        title: 'Brand',
+        href: '/settings/brand',
+        icon: null,
+    },
 ];
 
 export default function SettingsLayout({ children }: PropsWithChildren) {

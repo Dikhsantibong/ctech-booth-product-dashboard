@@ -44,9 +44,15 @@ class HandleInertiaRequests extends Middleware
             $request->session()->put('active_machine_id', $activeMachine->id);
         }
 
+        $appName = \App\Models\AppSetting::get('app_name', config('app.name'));
+        $appLogo = \App\Models\AppSetting::get('app_logo') ? \Illuminate\Support\Facades\Storage::url(\App\Models\AppSetting::get('app_logo')) : null;
+        $primaryColor = \App\Models\AppSetting::get('primary_color');
+
         return [
             ...parent::share($request),
-            'name' => config('app.name'),
+            'name' => $appName,
+            'appLogo' => $appLogo,
+            'primaryColor' => $primaryColor,
             'auth' => [
                 'user' => $request->user(),
             ],

@@ -12,7 +12,7 @@ import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 
 const fieldClass =
-    'h-11 border-white/10 bg-white/5 text-white shadow-none placeholder:text-zinc-500 focus-visible:border-[#2563eb] focus-visible:ring-[#2563eb]/35';
+    'h-11 border-zinc-200 bg-transparent text-zinc-900 shadow-sm placeholder:text-zinc-500 focus-visible:border-primary focus-visible:ring-primary/35';
 
 type Props = {
     status?: string;
@@ -42,7 +42,7 @@ export default function Login({ status, canResetPassword }: Props) {
                             <div className="grid gap-2">
                                 <Label
                                     htmlFor="email"
-                                    className="text-zinc-300"
+                                    className="text-zinc-700"
                                 >
                                     Email address
                                 </Label>
@@ -67,7 +67,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                 <div className="flex items-center">
                                     <Label
                                         htmlFor="password"
-                                        className="text-zinc-300"
+                                        className="text-zinc-700"
                                     >
                                         Password
                                     </Label>
@@ -75,7 +75,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                         <TextLink
                                             href={request()}
                                             className={cn(
-                                                'ml-auto text-sm text-[#2563eb] decoration-[#2563eb]/50 underline-offset-4 hover:text-[#3b82f6] hover:decoration-[#3b82f6]',
+                                                'ml-auto text-sm text-primary decoration-primary/50 underline-offset-4 hover:opacity-80',
                                             )}
                                             tabIndex={5}
                                         >
@@ -91,7 +91,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                     autoComplete="current-password"
                                     placeholder="••••••••"
                                     className={cn(fieldClass, 'pr-10')}
-                                    toggleClassName="text-zinc-400 hover:text-zinc-200 focus-visible:ring-[#2563eb]/40"
+                                    toggleClassName="text-zinc-500 hover:text-zinc-700 focus-visible:ring-primary/40"
                                 />
                                 <InputError
                                     message={errors.password}
@@ -104,11 +104,11 @@ export default function Login({ status, canResetPassword }: Props) {
                                     id="remember"
                                     name="remember"
                                     tabIndex={3}
-                                    className="border-white/20 data-[state=checked]:border-[#2563eb] data-[state=checked]:bg-[#2563eb] data-[state=checked]:text-white"
+                                    className="border-zinc-300 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
                                 />
                                 <Label
                                     htmlFor="remember"
-                                    className="text-sm text-zinc-300"
+                                    className="text-sm text-zinc-700"
                                 >
                                     Remember me
                                 </Label>
@@ -116,7 +116,7 @@ export default function Login({ status, canResetPassword }: Props) {
 
                             <Button
                                 type="submit"
-                                className="mt-2 h-11 w-full bg-[#2563eb] font-semibold text-white shadow-lg shadow-[#2563eb]/25 transition-colors hover:bg-[#1e40af]"
+                                className="mt-2 h-11 w-full bg-primary font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-colors hover:opacity-90"
                                 tabIndex={4}
                                 disabled={processing}
                                 data-test="login-button"
