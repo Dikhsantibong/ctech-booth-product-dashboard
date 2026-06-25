@@ -12,7 +12,7 @@ import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 
 const fieldClass =
-    'h-11 border-zinc-200 bg-transparent text-zinc-900 shadow-sm placeholder:text-zinc-500 focus-visible:border-primary focus-visible:ring-primary/35';
+    'h-11 border-zinc-800 bg-transparent text-zinc-100 shadow-sm placeholder:text-zinc-500 focus-visible:border-primary focus-visible:ring-primary/35';
 
 type Props = {
     status?: string;
@@ -42,7 +42,7 @@ export default function Login({ status, canResetPassword }: Props) {
                             <div className="grid gap-2">
                                 <Label
                                     htmlFor="email"
-                                    className="text-zinc-700"
+                                    className="text-zinc-300"
                                 >
                                     Email address
                                 </Label>
@@ -67,7 +67,7 @@ export default function Login({ status, canResetPassword }: Props) {
                                 <div className="flex items-center">
                                     <Label
                                         htmlFor="password"
-                                        className="text-zinc-700"
+                                        className="text-zinc-300"
                                     >
                                         Password
                                     </Label>
@@ -104,11 +104,11 @@ export default function Login({ status, canResetPassword }: Props) {
                                     id="remember"
                                     name="remember"
                                     tabIndex={3}
-                                    className="border-zinc-300 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                                    className="border-zinc-700 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
                                 />
                                 <Label
                                     htmlFor="remember"
-                                    className="text-sm text-zinc-700"
+                                    className="text-sm text-zinc-300"
                                 >
                                     Remember me
                                 </Label>
