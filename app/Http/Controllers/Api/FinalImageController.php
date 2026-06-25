@@ -120,6 +120,37 @@ class FinalImageController extends Controller
     }
 
     /**
+     * Get the 5 most recent final images for the authenticated machine.
+     */
+    public function recent(Request $request): JsonResponse
+    {
+        $token = $request->header('X-Machine-Token');
+
+        if (!$token) {
+            return response()->json(['message' => 'Machine token is required'], 401);
+        }
+
+        $machine = Machine::where('token', $token)->where('is_active', true)->first();
+
+        if (!$machine) {
+            return response()->json(['message' => 'Invalid or inactive machine token'], 403);
+        }
+
+        $recentImages = FinalImage::whereHas('transaction', function ($query) use ($machine) {
+                $query->where('machine_id', $machine->id)
+                      ->where('status', 'COMPLETED');
+            })
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $recentImages,
+        ]);
+    }
+
+    /**
      * Update the print status of a final image.
      */
     public function print(Request $request, $id): JsonResponse

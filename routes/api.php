@@ -15,4 +15,5 @@ Route::get('/stickers', [StickerController::class, 'index']);
 Route::post('/vouchers', [VoucherController::class, 'index']);
 Route::post('/transactions', [TransactionController::class, 'store']);
 Route::post('/final-images', [FinalImageController::class, 'store']);
+Route::get('/final-images/recent', [FinalImageController::class, 'recent']);
 Route::post('/final-images/{id}/print', [FinalImageController::class, 'print']);
