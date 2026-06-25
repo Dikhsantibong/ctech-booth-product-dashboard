@@ -64,7 +64,7 @@ export default function LoginBrandLayout({ children }: { children: ReactNode }) 
                             'radial-gradient(ellipse 85% 55% at 50% -10%, var(--color-primary), transparent 50%)',
                     }}
                 />
-                <div className="relative mx-auto w-full max-w-[420px] rounded-2xl border border-zinc-800 bg-zinc-950 p-8 shadow-lg shadow-black/5 ring-1 ring-zinc-800 backdrop-blur-xl sm:p-9">
+                <div className="relative mx-auto w-full max-w-[420px] rounded-2xl border border-zinc-800 bg-black p-8 shadow-lg shadow-black/5 ring-1 ring-zinc-800 backdrop-blur-xl sm:p-9">
                     <div className="mb-8 text-center">
                         <h1 className="text-[1.65rem] font-semibold tracking-tight text-zinc-100">
                             Welcome back

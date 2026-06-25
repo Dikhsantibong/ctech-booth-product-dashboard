@@ -42,7 +42,7 @@ export default function Welcome() {
                             'radial-gradient(ellipse 100% 60% at 50% -25%, rgba(37,99,235,0.08), transparent 55%), radial-gradient(circle at 100% 0%, rgba(37,99,235,0.04), transparent 40%)',
                     }}
                 />
-                <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(to_bottom,transparent_0%,rgba(255,255,255,0.4)_100%)]" />
+                <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(to_bottom,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
 
                 <header className="relative z-10 border-b border-zinc-800 bg-black/75 backdrop-blur-xl">
                     <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
@@ -122,7 +122,7 @@ export default function Welcome() {
 
                     <section
                         id="features"
-                        className="border-t border-zinc-800 bg-zinc-950 py-16 sm:py-20 lg:py-24"
+                        className="border-t border-zinc-800 bg-black py-16 sm:py-20 lg:py-24"
                     >
                         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                             <div className="mx-auto max-w-2xl text-center">
@@ -138,7 +138,7 @@ export default function Welcome() {
                                 {features.map(({ icon: Icon, title, description }) => (
                                     <li
                                         key={title}
-                                        className="group rounded-2xl border border-zinc-800 bg-zinc-900 p-6 shadow-lg shadow-black/5 backdrop-blur-sm transition hover:border-primary/30 hover:bg-zinc-800 sm:p-7"
+                                        className="group rounded-2xl border border-zinc-800 bg-black p-6 shadow-lg shadow-black/5 backdrop-blur-sm transition hover:border-primary/30 hover:bg-white/5 sm:p-7"
                                     >
                                         <div className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/20 transition group-hover:bg-primary/15">
                                             <Icon className="size-5" strokeWidth={2} />
