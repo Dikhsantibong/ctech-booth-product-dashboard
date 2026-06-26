@@ -1,4 +1,4 @@
-import { Head, useForm, router } from '@inertiajs/react';
+import { Head, useForm, router, usePage } from '@inertiajs/react';
 import { Plus, Edit, Trash2, MoreVertical, Copy, Ticket, Search, RefreshCw, Printer } from 'lucide-react';
 import { useState } from 'react';
 import { Pagination } from '@/components/pagination';
