@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
 import galleryRoute from '@/routes/gallery';
 import transactionsRoute from '@/routes/transactions';
 
@@ -24,6 +25,15 @@ const formatDate = (date: string | null) => {
     } catch (e) {
         return '-';
     }
+};
+
+const isToday = (date: string | null) => {
+    if (!date) return false;
+    const d = new Date(date);
+    const today = new Date();
+    return d.getDate() === today.getDate() &&
+           d.getMonth() === today.getMonth() &&
+           d.getFullYear() === today.getFullYear();
 };
 
 interface FinalImage {
@@ -162,6 +172,15 @@ export default function GalleryIndex({ gallery, filters }: Props) {
                                         className="max-h-full max-w-full object-contain transition-transform group-hover:scale-110 cursor-pointer"
                                         onClick={() => setSelectedImage(item)}
                                     />
+
+                                    {/* New Badge */}
+                                    {isToday(item.created_at) && (
+                                        <div className="absolute top-2 left-2 flex flex-col gap-1 pointer-events-none">
+                                            <Badge variant="destructive" className="text-[10px] shadow-sm bg-red-500 hover:bg-red-500 text-white shadow-red-500/50">
+                                                NEW
+                                            </Badge>
+                                        </div>
+                                    )}
 
                                     {/* Hover Actions */}
                                     <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col gap-1">
