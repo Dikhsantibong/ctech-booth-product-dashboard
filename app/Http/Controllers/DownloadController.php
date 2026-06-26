@@ -13,6 +13,11 @@ class DownloadController extends Controller
             ->where('token', $token)
             ->firstOrFail();
 
-        return view('downloads', compact('finalImage'));
+        $settings = \App\Models\AppSetting::pluck('value', 'key');
+        $appName = $settings['app_name'] ?? config('app.name', 'Potopi');
+        $appLogo = !empty($settings['app_logo']) ? asset('storage/' . $settings['app_logo']) : asset('images/logo.png');
+        $primaryColor = $settings['primary_color'] ?? '#3b82f6';
+
+        return view('downloads', compact('finalImage', 'appName', 'appLogo', 'primaryColor'));
     }
 }

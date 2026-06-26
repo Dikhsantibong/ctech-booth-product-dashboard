@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Download Your Memories | {{ config('app.name', 'Potopi') }}</title>
-    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png" sizes="any">
-    <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}">
+    <title>Download Your Memories | {{ $appName }}</title>
+    <link rel="icon" href="{{ $appLogo }}" type="image/png" sizes="any">
+    <link rel="apple-touch-icon" href="{{ $appLogo }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --primary: #3b82f6;
-            --primary-hover: #2563eb;
+            --primary: {{ $primaryColor }};
+            --primary-hover: {{ $primaryColor }}ee;
             --bg-dark: #1e3a8a;
             --bg-card: rgba(30, 58, 138, 0.7);
             --text-main: #ffffff;
@@ -243,7 +243,7 @@
 <body>
     <div class="container">
         <header>
-            <img src="{{ asset('images/logo.png') }}" alt="Potopi Photobooth" class="brand-logo" decoding="async"
+            <img src="{{ $appLogo }}" alt="{{ $appName }}" class="brand-logo" decoding="async"
                 fetchpriority="high">
             <p class="subtitle">Your memories from {{ $finalImage->transaction->machine->name ?? 'our booth' }} are
                 ready!</p>
@@ -319,7 +319,7 @@
         @endif
 
         <footer>
-            <p>&copy; {{ date('Y') }} Potopi. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} {{ $appName }}. All rights reserved.</p>
         </footer>
     </div>
 

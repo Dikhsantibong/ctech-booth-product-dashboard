@@ -103,7 +103,7 @@ const iconMap: Record<IconKey, ComponentType<{ className?: string }>> = {
 };
 
 export default function Dashboard() {
-    const { auth, stats, recentActivities, performanceTargets, transactionChartData, revenueSummary, transactionBreakdown, reportFilters } =
+    const { auth, name: appName, stats, recentActivities, performanceTargets, transactionChartData, revenueSummary, transactionBreakdown, reportFilters } =
         usePage<DashboardPageProps>().props;
     const firstName = auth?.user?.name?.split(' ')[0] ?? 'Tim';
     const maxTransaction = Math.max(1, ...transactionChartData.map((item) => item.total));
@@ -150,7 +150,7 @@ export default function Dashboard() {
                                 Halo, {firstName}! 👋
                             </CardTitle>
                             <CardDescription>
-                                Ringkasan performa bisnis Potopi Photobooth hari ini.
+                                Ringkasan performa bisnis {appName} hari ini.
                             </CardDescription>
                         </div>
                         <Badge variant="secondary" className="gap-1">
