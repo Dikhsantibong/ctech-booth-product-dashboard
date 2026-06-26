@@ -205,6 +205,8 @@ class DashboardController extends Controller
                     'transactionChartData' => $this->buildRangeTransactionChart($rangeStart, $rangeEnd),
                     'revenueSummary' => $revenueSummary,
                     'transactionBreakdown' => $transactionBreakdown,
+                    'peakHoursChartData' => $this->buildPeakHoursChart($rangeStart, $rangeEnd),
+                    'popularTemplate' => $this->getPopularTemplate($rangeStart, $rangeEnd),
                 ];
             }
         );
@@ -216,6 +218,8 @@ class DashboardController extends Controller
             'transactionChartData' => $payload['transactionChartData'],
             'revenueSummary' => $payload['revenueSummary'],
             'transactionBreakdown' => $payload['transactionBreakdown'],
+            'peakHoursChartData' => $payload['peakHoursChartData'],
+            'popularTemplate' => $payload['popularTemplate'],
             'reportFilters' => [
                 'startDate' => $rangeStart->toDateString(),
                 'endDate' => $rangeEnd->toDateString(),
@@ -290,6 +294,55 @@ class DashboardController extends Controller
         }
 
         return $chart;
+    }
+
+    private function buildPeakHoursChart(Carbon $rangeStart, Carbon $rangeEnd): array
+    {
+        $raw = Transaction::select(
+            DB::raw('HOUR(created_at) as hour'),
+            DB::raw('COUNT(*) as total')
+        )
+            ->whereBetween('created_at', [$rangeStart, $rangeEnd])
+            ->where('status', 'COMPLETED')
+            ->groupBy(DB::raw('HOUR(created_at)'))
+            ->pluck('total', 'hour');
+
+        $chart = [];
+        for ($i = 0; $i < 24; $i++) {
+            $chart[] = [
+                'hour' => sprintf('%02d:00', $i),
+                'total' => (int) ($raw[$i] ?? 0),
+            ];
+        }
+        return $chart;
+    }
+
+    private function getPopularTemplate(Carbon $rangeStart, Carbon $rangeEnd): ?array
+    {
+        $result = Transaction::select('template_id', DB::raw('COUNT(*) as total'))
+            ->whereBetween('created_at', [$rangeStart, $rangeEnd])
+            ->where('status', 'COMPLETED')
+            ->whereNotNull('template_id')
+            ->groupBy('template_id')
+            ->orderByDesc('total')
+            ->first();
+
+        if (!$result) {
+            return null;
+        }
+
+        $template = \App\Models\Template::find($result->template_id);
+        if (!$template) {
+            return null;
+        }
+
+        return [
+            'id' => $template->id,
+            'name' => $template->name,
+            'type' => $template->type,
+            'template_path' => $template->template_path ? '/storage/' . $template->template_path : null,
+            'total_uses' => $result->total,
+        ];
     }
 
     /**

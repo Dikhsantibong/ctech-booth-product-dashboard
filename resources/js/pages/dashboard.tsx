@@ -10,6 +10,10 @@ import {
     Sparkles,
     Ticket,
     TrendingUp,
+    Clock,
+    Image as ImageIcon,
+    Star,
+    Layers,
 } from 'lucide-react';
 import type { ComponentType } from 'react';
 import { useState } from 'react';
@@ -84,6 +88,19 @@ type ReportFilters = {
     endDate: string;
 };
 
+type PeakHoursPoint = {
+    hour: string;
+    total: number;
+};
+
+type PopularTemplate = {
+    id: number;
+    name: string;
+    type: string;
+    template_path: string | null;
+    total_uses: number;
+};
+
 type DashboardPageProps = {
     auth?: { user?: { name?: string } };
     stats: DashboardStat[];
@@ -93,6 +110,8 @@ type DashboardPageProps = {
     revenueSummary: RevenueSummary;
     transactionBreakdown: TransactionBreakdown;
     reportFilters: ReportFilters;
+    peakHoursChartData: PeakHoursPoint[];
+    popularTemplate: PopularTemplate | null;
 };
 
 const iconMap: Record<IconKey, ComponentType<{ className?: string }>> = {
@@ -103,10 +122,11 @@ const iconMap: Record<IconKey, ComponentType<{ className?: string }>> = {
 };
 
 export default function Dashboard() {
-    const { auth, name: appName, stats, recentActivities, performanceTargets, transactionChartData, revenueSummary, transactionBreakdown, reportFilters } =
+    const { auth, name: appName, stats, recentActivities, performanceTargets, transactionChartData, revenueSummary, transactionBreakdown, reportFilters, peakHoursChartData, popularTemplate } =
         usePage<DashboardPageProps>().props;
     const firstName = auth?.user?.name?.split(' ')[0] ?? 'Tim';
     const maxTransaction = Math.max(1, ...transactionChartData.map((item) => item.total));
+    const maxPeakHour = Math.max(1, ...peakHoursChartData.map((item) => item.total));
     const [startDate, setStartDate] = useState(reportFilters.startDate);
     const [endDate, setEndDate] = useState(reportFilters.endDate);
 
@@ -481,6 +501,137 @@ export default function Dashboard() {
                         )}
                     </CardContent>
                 </Card>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="flex items-center gap-2 text-base">
+                                <Clock className="h-4 w-4" />
+                                Jam Sibuk (Peak Hours)
+                            </CardTitle>
+                            <CardDescription>
+                                Waktu dengan jumlah transaksi terbanyak.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            {peakHoursChartData.length > 0 ? (
+                                <div className="relative h-48 w-full mt-4">
+                                    <svg
+                                        className="h-full w-full overflow-visible"
+                                        viewBox="0 0 400 150"
+                                        preserveAspectRatio="none"
+                                    >
+                                        {/* Grid lines */}
+                                        {[0, 25, 50, 75, 100].map((percent) => (
+                                            <line
+                                                key={percent}
+                                                x1="0"
+                                                y1={150 - (percent / 100) * 130}
+                                                x2="400"
+                                                y2={150 - (percent / 100) * 130}
+                                                stroke="hsl(var(--border))"
+                                                strokeWidth="1"
+                                                strokeDasharray="4"
+                                            />
+                                        ))}
+                                        
+                                        {/* Bar chart */}
+                                        {peakHoursChartData.map((point, index) => {
+                                            const barWidth = 400 / peakHoursChartData.length - 4;
+                                            const x = (index * (400 / peakHoursChartData.length)) + 2;
+                                            const y = 150 - (point.total / (maxPeakHour || 1)) * 130;
+                                            const height = (point.total / (maxPeakHour || 1)) * 130;
+                                            
+                                            // Only render labels for some hours (every 4 hours) to avoid clutter
+                                            const showLabel = index % 4 === 0;
+
+                                            return (
+                                                <g key={point.hour}>
+                                                    <rect
+                                                        x={x}
+                                                        y={y}
+                                                        width={barWidth}
+                                                        height={height}
+                                                        fill="hsl(var(--primary))"
+                                                        className="hover:opacity-80 transition-opacity cursor-pointer"
+                                                        rx="2"
+                                                    />
+                                                    <title>{`${point.hour} - ${point.total} transaksi`}</title>
+                                                    {showLabel && (
+                                                        <text
+                                                            x={x + barWidth / 2}
+                                                            y="165"
+                                                            textAnchor="middle"
+                                                            className="text-[10px] fill-muted-foreground"
+                                                        >
+                                                            {point.hour.split(':')[0]}
+                                                        </text>
+                                                    )}
+                                                </g>
+                                            );
+                                        })}
+                                    </svg>
+                                </div>
+                            ) : (
+                                <div className="text-muted-foreground rounded-lg border border-dashed p-3 text-sm">
+                                    Belum ada data untuk ditampilkan.
+                                </div>
+                            )}
+                        </CardContent>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="flex items-center gap-2 text-base">
+                                <Star className="h-4 w-4" />
+                                Template Terpopuler
+                            </CardTitle>
+                            <CardDescription>
+                                Template yang paling sering digunakan pelanggan.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            {popularTemplate ? (
+                                <div className="flex flex-col items-center gap-4 pt-2">
+                                    <div className="relative aspect-[3/4] w-32 md:w-40 overflow-hidden rounded-md border bg-muted shadow-sm">
+                                        {popularTemplate.template_path ? (
+                                            <img
+                                                src={popularTemplate.template_path}
+                                                alt={popularTemplate.name}
+                                                className="h-full w-full object-cover transition-transform hover:scale-105"
+                                            />
+                                        ) : (
+                                            <div className="flex h-full w-full items-center justify-center">
+                                                <ImageIcon className="h-8 w-8 text-muted-foreground/30" />
+                                            </div>
+                                        )}
+                                        <div className="absolute top-2 right-2">
+                                            <Badge variant="secondary" className="shadow-sm border">
+                                                <Star className="mr-1 h-3 w-3 fill-yellow-500 text-yellow-500" />
+                                                Terbaik
+                                            </Badge>
+                                        </div>
+                                    </div>
+                                    <div className="text-center">
+                                        <h4 className="font-semibold">{popularTemplate.name}</h4>
+                                        <div className="flex items-center justify-center gap-2 mt-1 text-sm text-muted-foreground">
+                                            <Badge variant="outline" className="capitalize text-[10px] h-5">{popularTemplate.type}</Badge>
+                                            <span className="flex items-center gap-1">
+                                                <Layers className="h-3 w-3" />
+                                                Digunakan {popularTemplate.total_uses} kali
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="text-muted-foreground rounded-lg border border-dashed p-3 text-sm text-center py-10 flex flex-col items-center justify-center">
+                                    <ImageIcon className="h-8 w-8 text-muted-foreground/30 mb-2" />
+                                    Belum ada transaksi dengan template.
+                                </div>
+                            )}
+                        </CardContent>
+                    </Card>
+                </div>
 
                 <Card>
                     <CardHeader>
