@@ -67,7 +67,7 @@
         /* Hero Section */
         .hero-section {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-bottom: 4rem;
         }
@@ -280,6 +280,22 @@
                     <a href="{{ $finalImage->video_url }}" download="Roambooth_LivePhoto_{{ $finalImage->token }}.mp4"
                         class="download-btn">
                         <i data-lucide="download"></i> Download Video
+                    </a>
+                </div>
+            @endif
+
+            <!-- GIF Video Card -->
+            @if (isset($finalImage->gif_url) && $finalImage->gif_url)
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i data-lucide="video"></i> GIF Video</h2>
+                    </div>
+                    <div class="media-preview">
+                        <video src="{{ $finalImage->gif_url }}" controls loop autoplay muted preload="metadata"></video>
+                    </div>
+                    <a href="{{ $finalImage->gif_url }}" download="Potopi_GIF_{{ $finalImage->token }}.mp4"
+                        class="download-btn">
+                        <i data-lucide="download"></i> Download GIF
                     </a>
                 </div>
             @endif
