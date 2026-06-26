@@ -43,7 +43,7 @@ export function CreateMachineModal({ isOpen, setIsOpen }: Props) {
             onSuccess: () => {
                 setIsOpen(false);
                 reset();
-                toast.success('Machine created successfully');
+                toast.success('Event / Booth created successfully');
             },
         });
     };
@@ -59,9 +59,9 @@ export function CreateMachineModal({ isOpen, setIsOpen }: Props) {
             <DialogContent className="max-h-[90vh] overflow-y-auto">
                 <form onSubmit={submitCreate}>
                     <DialogHeader>
-                        <DialogTitle>Add Machine</DialogTitle>
+                        <DialogTitle>Add Event / Booth</DialogTitle>
                         <DialogDescription>
-                            Create a new machine for your photobooth system.
+                            Create a new event or machine for your photobooth system.
                         </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
@@ -78,7 +78,7 @@ export function CreateMachineModal({ isOpen, setIsOpen }: Props) {
                         <div className="flex items-center justify-between rounded-lg border p-3">
                             <div className="space-y-0.5">
                                 <Label htmlFor="is_active">Is Active</Label>
-                                <p className="text-[0.8rem] text-muted-foreground">Enable or disable this machine.</p>
+                                <p className="text-[0.8rem] text-muted-foreground">Enable or disable this event.</p>
                             </div>
                             <Switch
                                 id="is_active"
@@ -169,7 +169,7 @@ export function CreateMachineModal({ isOpen, setIsOpen }: Props) {
                             Cancel
                         </Button>
                         <Button type="submit" disabled={processing}>
-                            Create Machine
+                            Create Event / Booth
                         </Button>
                     </DialogFooter>
                 </form>

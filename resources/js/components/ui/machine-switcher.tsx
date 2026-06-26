@@ -51,7 +51,7 @@ export function MachineSwitcher() {
                                 </div>
                                 <div className="grid flex-1 text-left text-sm leading-tight">
                                     <span className="truncate font-semibold">
-                                        {activeMachine ? activeMachine.name : 'All Machines'}
+                                        {activeMachine ? activeMachine.name : 'All Events / Booths'}
                                     </span>
                                     <span className="truncate text-xs">
                                         {activeMachine?.is_active ? 'Active' : 'Offline'}

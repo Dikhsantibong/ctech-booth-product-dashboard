@@ -1,5 +1,5 @@
 import { Head, useForm, Link, router } from '@inertiajs/react';
-import { Plus, Edit, Trash2, MoreVertical, Search, Image as ImageIcon, Layout, Maximize, FileText, Layers } from 'lucide-react';
+import { Plus, Edit, Trash2, MoreVertical, Search, Image as ImageIcon, Layout, Maximize, FileText, Layers, LayoutGrid, List } from 'lucide-react';
 import { useState } from 'react';
 import { Pagination } from '@/components/pagination';
 import { Button } from '@/components/ui/button';
@@ -81,6 +81,7 @@ interface Props {
 }
 
 export default function TemplateIndex({ templates, filters }: Props) {
+    const [viewMode, setViewMode] = useState<'gallery' | 'table'>('gallery');
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
     const [searchQuery, setSearchQuery] = useState(filters.search || '');
@@ -214,8 +215,27 @@ export default function TemplateIndex({ templates, filters }: Props) {
                                     <SelectItem value="landscape">Landscape</SelectItem>
                                 </SelectContent>
                             </Select>
+                            <div className="flex bg-sidebar rounded-md border p-0.5">
+                                <Button
+                                    variant={viewMode === 'gallery' ? 'secondary' : 'ghost'}
+                                    size="icon"
+                                    className="h-8 w-8 rounded-sm shadow-none"
+                                    onClick={() => setViewMode('gallery')}
+                                >
+                                    <LayoutGrid className="h-4 w-4" />
+                                </Button>
+                                <Button
+                                    variant={viewMode === 'table' ? 'secondary' : 'ghost'}
+                                    size="icon"
+                                    className="h-8 w-8 rounded-sm shadow-none"
+                                    onClick={() => setViewMode('table')}
+                                >
+                                    <List className="h-4 w-4" />
+                                </Button>
+                            </div>
                         </div>
                     </div>
+                    {viewMode === 'table' ? (
                     <Table>
                         <TableHeader className='bg-sidebar'>
                             <TableRow>
@@ -326,6 +346,84 @@ export default function TemplateIndex({ templates, filters }: Props) {
                             )}
                         </TableBody>
                     </Table>
+                    ) : (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 divide-x divide-y border-collapse">
+                        {templates.data.length === 0 ? (
+                            <div className="col-span-full pb-6 pt-6 text-center">
+                                <ImageIcon className="mx-auto h-12 w-12 text-muted-foreground/30" />
+                                <h3 className="text-lg font-medium">No results found</h3>
+                                <p className="text-sm text-muted-foreground">Try adjusting your search filters.</p>
+                            </div>
+                        ) : (
+                            templates.data.map((template) => (
+                                <div
+                                    key={template.id}
+                                    className="group relative aspect-[3/4] flex flex-col items-center justify-center p-4 hover:bg-muted/30 transition-colors border-r border-b"
+                                >
+                                    {template.template_path ? (
+                                        <img
+                                            src={getThumbnailUrl(template.template_path)!}
+                                            alt={template.name}
+                                            className="max-h-full max-w-full object-contain transition-transform group-hover:scale-105"
+                                        />
+                                    ) : (
+                                        <ImageIcon className="h-12 w-12 text-muted-foreground/30" />
+                                    )}
+                                    
+                                    {/* Actions overlay */}
+                                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col gap-1">
+                                        <Button
+                                            variant="secondary"
+                                            size="icon"
+                                            className="h-8 w-8 shadow-md text-primary hover:text-primary"
+                                            asChild
+                                        >
+                                            <Link href={templatesRoute.edit(template.id).url}>
+                                                <Edit className="h-4 w-4" />
+                                            </Link>
+                                        </Button>
+                                        <Button
+                                            variant={template.is_active ? "default" : "secondary"}
+                                            size="icon"
+                                            className="h-8 w-8 shadow-md"
+                                            onClick={() => handleToggleStatus(template)}
+                                            title={template.is_active ? "Deactivate" : "Activate"}
+                                        >
+                                            <Layers className="h-4 w-4" />
+                                        </Button>
+                                        <Button
+                                            variant="destructive"
+                                            size="icon"
+                                            className="h-8 w-8 shadow-md"
+                                            onClick={() => openDeleteModal(template)}
+                                        >
+                                            <Trash2 className="h-4 w-4" />
+                                        </Button>
+                                    </div>
+
+                                    {/* Badge Overlay */}
+                                    <div className="absolute top-2 left-2 flex flex-col gap-1 pointer-events-none">
+                                        <Badge variant={template.is_active ? 'default' : 'secondary'} className="text-[10px] shadow-sm">
+                                            {template.is_active ? 'Active' : 'Inactive'}
+                                        </Badge>
+                                    </div>
+
+                                    {/* Info Overlay */}
+                                    <div className="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                        <div className="bg-black/70 text-white text-[10px] px-2 py-1.5 rounded text-center flex flex-col shadow-lg backdrop-blur-sm">
+                                            <span className="truncate font-semibold">{template.name}</span>
+                                            <div className="flex items-center justify-center gap-2 mt-1 opacity-90 border-t border-white/20 pt-1">
+                                                <span className="capitalize">{template.type}</span>
+                                                <span>•</span>
+                                                <span className="flex items-center gap-1"><Layers className="h-3 w-3" /> {template.frame_count}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                    )}
                     <div className="border-t bg-sidebar">
                         <Pagination links={templates.links} className="py-3" />
                     </div>

@@ -50,6 +50,7 @@ interface Transaction {
         id: number;
         image_url: string;
         video_url: string | null;
+        gif_url: string | null;
         amount_print: number | null;
         print_quantity: number;
     } | null;
@@ -173,7 +174,7 @@ return '-';
                                     </Badge>
                                 </div>
 
-                                <div className="text-muted-foreground">Machine</div>
+                                <div className="text-muted-foreground">Event / Booth</div>
                                 <div className="font-medium text-primary uppercase">{transaction.machine.name}</div>
 
                                 <div className="text-muted-foreground">Template</div>

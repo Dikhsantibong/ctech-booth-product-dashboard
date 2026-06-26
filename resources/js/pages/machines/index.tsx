@@ -161,14 +161,14 @@ export default function MachineIndex({ machines }: Props) {
 
     return (
         <>
-            <Head title="Manage Machines" />
+            <Head title="Manage Events & Booths" />
 
             <div className="flex h-full flex-1 flex-col gap-4 p-4">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h2 className="text-2xl font-bold tracking-tight">Machines</h2>
+                        <h2 className="text-2xl font-bold tracking-tight">Events & Booths</h2>
                         <p className="text-muted-foreground">
-                            Manage your photobooth machines here.
+                            Manage your photobooth events and machines here.
                         </p>
                     </div>
                 </div>
@@ -178,7 +178,7 @@ export default function MachineIndex({ machines }: Props) {
                         <div className="relative flex-1 max-w-sm">
                             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-sidebar-foreground" />
                             <Input
-                                placeholder="Search machines..."
+                                placeholder="Search events..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 className="bg-sidebar h-9 pl-9 w-full shadow-none focus-visible:ring-1"
@@ -237,8 +237,8 @@ export default function MachineIndex({ machines }: Props) {
                                 <TableRow>
                                     <TableCell colSpan={6} className="h-24 text-center">
                                         {(searchQuery || statusFilter !== 'all' || paymentFilter !== 'all')
-                                            ? 'No machines match your filters.'
-                                            : 'No machines found.'}
+                                            ? 'No events match your filters.'
+                                            : 'No events found.'}
                                     </TableCell>
                                 </TableRow>
                             ) : (
@@ -300,14 +300,14 @@ export default function MachineIndex({ machines }: Props) {
                 </div>
             </div>
 
-            {/* Edit Machine Modal */}
+            {/* Edit Event Modal */}
             <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
                 <DialogContent>
                     <form onSubmit={submitEdit}>
                         <DialogHeader>
-                            <DialogTitle>Edit Machine</DialogTitle>
+                            <DialogTitle>Edit Event / Booth</DialogTitle>
                             <DialogDescription>
-                                Update the details of your machine.
+                                Update the details of your event.
                             </DialogDescription>
                         </DialogHeader>
                         <div className="grid gap-4 py-4">
@@ -344,7 +344,7 @@ export default function MachineIndex({ machines }: Props) {
                             <div className="flex items-center justify-between rounded-lg border p-3">
                                 <div className="space-y-0.5">
                                     <Label htmlFor="edit-is_active">Is Active</Label>
-                                    <p className="text-[0.8rem] text-muted-foreground">Enable or disable this machine.</p>
+                                    <p className="text-[0.8rem] text-muted-foreground">Enable or disable this event.</p>
                                 </div>
                                 <Switch
                                     id="edit-is_active"
@@ -446,7 +446,7 @@ export default function MachineIndex({ machines }: Props) {
             <Dialog open={isDeleteModalOpen} onOpenChange={setIsDeleteModalOpen}>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Delete Machine</DialogTitle>
+                        <DialogTitle>Delete Event / Booth</DialogTitle>
                         <DialogDescription>
                             Are you sure you want to delete <strong>{selectedMachine?.name}</strong>? This action cannot be undone.
                         </DialogDescription>

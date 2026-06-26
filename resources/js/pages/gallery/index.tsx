@@ -233,7 +233,7 @@ export default function GalleryIndex({ gallery, filters }: Props) {
                                         <div className="flex items-start gap-3 bg-card border rounded-lg p-3 shadow-sm">
                                             <Monitor className="h-4 w-4 mt-0.5 text-blue-500" />
                                             <div>
-                                                <p className="text-[10px] uppercase text-muted-foreground font-bold tracking-widest">Machine</p>
+                                                <p className="text-[10px] uppercase text-muted-foreground font-bold tracking-widest">Event / Booth</p>
                                                 <p className="text-sm font-semibold">{selectedImage.transaction?.machine?.name || 'Unknown'}</p>
                                             </div>
                                         </div>

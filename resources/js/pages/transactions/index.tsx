@@ -194,7 +194,7 @@ return '-';
                         <TableHeader>
                             <TableRow className="bg-sidebar">
                                 <TableHead className="w-[150px]">Transaction ID</TableHead>
-                                <TableHead>Machine</TableHead>
+                                <TableHead>Event / Booth</TableHead>
                                 <TableHead>Template</TableHead>
                                 <TableHead className="text-right">Total</TableHead>
                                 <TableHead>Payment Type</TableHead>

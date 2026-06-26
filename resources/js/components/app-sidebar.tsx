@@ -42,7 +42,7 @@ const mainNavItems: NavItem[] = [
         icon: BookOpen,
     },
     {
-        title: 'Machines',
+        title: 'Events & Booths',
         href: machines.index(),
         icon: Monitor,
     },
