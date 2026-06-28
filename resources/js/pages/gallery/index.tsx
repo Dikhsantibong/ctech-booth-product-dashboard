@@ -183,11 +183,11 @@ export default function GalleryIndex({ gallery, filters }: Props) {
                                     )}
 
                                     {/* Hover Actions */}
-                                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col gap-1">
+                                    <div className="absolute top-2 right-2 flex flex-col gap-1">
                                         <Button
                                             variant="secondary"
                                             size="icon"
-                                            className="h-8 w-8 shadow-md"
+                                            className="h-8 w-8 shadow-md opacity-80 hover:opacity-100"
                                             onClick={() => item.transaction_id && router.get(transactionsRoute.show({ transaction: item.transaction_id }).url)}
                                         >
                                             <Eye className="h-4 w-4" />
@@ -195,7 +195,7 @@ export default function GalleryIndex({ gallery, filters }: Props) {
                                         <Button
                                             variant="secondary"
                                             size="icon"
-                                            className="h-8 w-8 shadow-md"
+                                            className="h-8 w-8 shadow-md opacity-80 hover:opacity-100"
                                             onClick={() => downloadImage(item.image_url, `result-${item.transaction?.transaction_id || item.id}.png`)}
                                         >
                                             <Download className="h-4 w-4" />
