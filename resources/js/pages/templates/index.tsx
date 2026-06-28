@@ -371,34 +371,34 @@ export default function TemplateIndex({ templates, filters }: Props) {
                                     )}
                                     
                                     {/* Actions overlay */}
-                                    <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col gap-1">
-                                        <Button
-                                            variant="secondary"
-                                            size="icon"
-                                            className="h-8 w-8 shadow-md text-primary hover:text-primary"
-                                            asChild
-                                        >
-                                            <Link href={templatesRoute.edit(template.id).url}>
-                                                <Edit className="h-4 w-4" />
-                                            </Link>
-                                        </Button>
-                                        <Button
-                                            variant={template.is_active ? "default" : "secondary"}
-                                            size="icon"
-                                            className="h-8 w-8 shadow-md"
-                                            onClick={() => handleToggleStatus(template)}
-                                            title={template.is_active ? "Deactivate" : "Activate"}
-                                        >
-                                            <Layers className="h-4 w-4" />
-                                        </Button>
-                                        <Button
-                                            variant="destructive"
-                                            size="icon"
-                                            className="h-8 w-8 shadow-md"
-                                            onClick={() => openDeleteModal(template)}
-                                        >
-                                            <Trash2 className="h-4 w-4" />
-                                        </Button>
+                                    <div className="absolute top-2 right-2">
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <Button variant="secondary" size="icon" className="h-8 w-8 shadow-md opacity-80 hover:opacity-100">
+                                                    <MoreVertical className="h-4 w-4" />
+                                                </Button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end">
+                                                <DropdownMenuItem asChild>
+                                                    <Link href={templatesRoute.edit(template.id).url} className="flex items-center w-full cursor-pointer">
+                                                        <Edit className="mr-2 h-4 w-4" /> Edit
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem
+                                                    onClick={() => handleToggleStatus(template)}
+                                                    className="cursor-pointer"
+                                                >
+                                                    <Layers className="mr-2 h-4 w-4" />
+                                                    {template.is_active ? 'Deactivate' : 'Activate'}
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem
+                                                    className="text-destructive focus:text-destructive cursor-pointer"
+                                                    onClick={() => openDeleteModal(template)}
+                                                >
+                                                    <Trash2 className="mr-2 h-4 w-4 text-destructive" /> Delete
+                                                </DropdownMenuItem>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
                                     </div>
 
                                     {/* Badge Overlay */}
